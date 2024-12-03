@@ -1,10 +1,13 @@
-﻿namespace FIQ.Interview.Api.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace FIQ.Interview.Api.Models
 {
     public class Project
     {
         public int Id { get; set; }
         public string Name { get; set; } = String.Empty;
-
-        public Project() { }
+        public ICollection<WorkItem> WorkItems { get; set; }
+        public Project() { 
+        }
     }
 }

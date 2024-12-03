@@ -1,3 +1,5 @@
+using FIQ.Interview.Api.Service;
+
 namespace FIQ.Interview.Api
 {
     public class Program
@@ -11,6 +13,9 @@ namespace FIQ.Interview.Api
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddScoped<IProjectService, ProjectService>();
+            builder.Services.AddSingleton<ProjectDbContext>();
 
             var app = builder.Build();
 
