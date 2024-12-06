@@ -1,4 +1,5 @@
 using FIQ.Interview.Api.Service;
+using FIQ.Interview.Api.Unility;
 
 namespace FIQ.Interview.Api
 {
@@ -13,7 +14,7 @@ namespace FIQ.Interview.Api
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            //builder.Services.
+            builder.Services.RegisterMapsterConfiguration();
 
             builder.Services.AddSingleton<ProjectDbContext>();
             builder.Services.AddScoped<IProjectService, ProjectService>();
