@@ -14,7 +14,7 @@ namespace FIQ.Interview.Api.Models
 
         public WorkItem()
         {
-            Project = new Project();
+           
         }
     }
 }

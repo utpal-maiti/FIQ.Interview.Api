@@ -13,9 +13,10 @@ namespace FIQ.Interview.Api
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            //builder.Services.
 
-            builder.Services.AddScoped<IProjectService, ProjectService>();
             builder.Services.AddSingleton<ProjectDbContext>();
+            builder.Services.AddScoped<IProjectService, ProjectService>();
 
             var app = builder.Build();
 

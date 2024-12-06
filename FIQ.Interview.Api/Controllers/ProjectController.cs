@@ -1,5 +1,8 @@
 ﻿using FIQ.Interview.Api.Models;
+using FIQ.Interview.Api.Models.Response;
 using FIQ.Interview.Api.Service;
+
+using Mapster;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,6 +25,7 @@ namespace FIQ.Interview.Api.Controllers
         {
             try
             {
+                //throw new Exception("sssssssssssssssss");
                 if (projectId<1)
                 {
                     return BadRequest("Invalid Project Id");
@@ -29,15 +33,16 @@ namespace FIQ.Interview.Api.Controllers
 
                 var result = this.projectService.GetProjectWithWorkItems(projectId);
 
-          
+               var responseDto= result.Adapt<ProjectResponse>();
 
-                return Ok(result);
+                return Ok(responseDto);
 
 
             }
             catch (Exception ex)
             {
-                
+
+                return Problem(ex.Message);
                 throw;
             }
         }
