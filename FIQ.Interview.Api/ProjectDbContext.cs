@@ -13,8 +13,8 @@ namespace FIQ.Interview.Api
          
         }
 
-        public DbSet<Project> Projects { get; set; } 
-        public DbSet<WorkItem> WorkItems { get; set; }
+        public virtual DbSet<Project> Projects { get; set; } 
+        public virtual DbSet<WorkItem> WorkItems { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
