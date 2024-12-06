@@ -7,6 +7,12 @@ namespace FIQ.Interview.Api
 {
     public class ProjectDbContext : DbContext
     {
+        protected ProjectDbContext()
+        {
+            this.Database.EnsureCreated();
+         
+        }
+
         public DbSet<Project> Projects { get; set; } 
         public DbSet<WorkItem> WorkItems { get; set; }
 
@@ -17,9 +23,6 @@ namespace FIQ.Interview.Api
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-
-
             modelBuilder.Entity<Project>(b =>
             {
               
@@ -44,7 +47,7 @@ namespace FIQ.Interview.Api
                 );
             });
 
-
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

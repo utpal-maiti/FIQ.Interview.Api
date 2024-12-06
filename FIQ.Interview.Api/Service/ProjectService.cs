@@ -11,7 +11,6 @@ public class ProjectService : IProjectService
     public ProjectService(ProjectDbContext dbContext)
     {
         this.dbContext = dbContext;
-        this.dbContext.Database.EnsureCreated();
     }
 
     public Project GetProjectWithWorkItems(int projectId)
