@@ -8,10 +8,13 @@ namespace FIQ.Interview.Api.Models
         [Key]
         public int Id { get; set; }
         public string Description { get; set; } = String.Empty;
-        
+
         public int ProjectId { get; set; }
         public Project Project { get; set; }
 
-        public WorkItem() { }
+        public WorkItem()
+        {
+            Project = new Project();
+        }
     }
 }

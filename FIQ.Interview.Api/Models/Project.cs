@@ -8,6 +8,7 @@ namespace FIQ.Interview.Api.Models
         public string Name { get; set; } = String.Empty;
         public ICollection<WorkItem> WorkItems { get; set; }
         public Project() { 
+            this.WorkItems = new HashSet<WorkItem>();
         }
     }
 }

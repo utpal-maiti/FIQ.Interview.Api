@@ -7,7 +7,7 @@ namespace FIQ.Interview.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ProjectController:Controller
+    public class ProjectController:ControllerBase
     {
         private readonly IProjectService projectService;
 
@@ -15,6 +15,7 @@ namespace FIQ.Interview.Api.Controllers
         {
             this.projectService = projectService;
         }
+
         [HttpGet(Name = "GetProjectById")]
 
         public IActionResult GetProjectById(int projectId)
