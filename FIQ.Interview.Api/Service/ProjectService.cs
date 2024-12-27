@@ -6,19 +6,19 @@ namespace FIQ.Interview.Api.Service;
 
 public class ProjectService : IProjectService
 {
-    private readonly ProjectDbContext dbContext;
+    private readonly ProjectDbContext _context;
 
     public ProjectService(ProjectDbContext dbContext)
     {
-        this.dbContext = dbContext;
+        this._context = dbContext;
+        this._context.Database.EnsureCreated();
     }
 
-    public Project GetProjectWithWorkItems(int projectId)
+    public async Task<Project?> GetProjectWithWorkItemsAsync(int projectId)
     {
-       var project= this.dbContext.Projects.
-                    Include(x=>x.WorkItems).
-                    FirstOrDefault(x=>x.Id == projectId);
-
-        return project;
+        var project= await _context.Projects
+            .Include(p => p.WorkItems)
+            .FirstOrDefaultAsync(p => p.Id == projectId);
+        return await Task.FromResult(project);
     }
 }

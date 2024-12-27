@@ -9,34 +9,36 @@ using Microsoft.AspNetCore.Mvc;
 namespace FIQ.Interview.Api.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class ProjectController:ControllerBase
     {
-        private readonly IProjectService projectService;
+        private readonly IProjectService _projectService;
 
         public ProjectController(IProjectService projectService)
         {
-            this.projectService = projectService;
+            this._projectService = projectService;
         }
 
-        [HttpGet(Name = "GetProjectById")]
+        [HttpGet("{projectId}", Name = "GetProjectById")]
 
-        public IActionResult GetProjectById(int projectId)
+        public async Task<IActionResult> GetProjectByIdAsync([FromRoute]int projectId)
         {
             try
             {
-                //throw new Exception("sssssssssssssssss");
+                //throw new Exception("User Exception");
                 if (projectId<1)
                 {
                     return BadRequest("Invalid Project Id");
                 }
 
-                var result = this.projectService.GetProjectWithWorkItems(projectId);
+                var project = await this._projectService.GetProjectWithWorkItemsAsync(projectId);
+                if (project == null)
+                {
+                    return NotFound();
+                }
+                var result = project.Adapt<ProjectResponse>();
 
-               var responseDto= result.Adapt<ProjectResponse>();
-
-                return Ok(responseDto);
-
+                return Ok(result);
 
             }
             catch (Exception ex)

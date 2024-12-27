@@ -16,6 +16,9 @@ namespace FIQ.Interview.Api
         {
             optionsBuilder.UseSqlite("Filename=./Project.db");
             optionsBuilder.EnableSensitiveDataLogging();
+            optionsBuilder.EnableDetailedErrors();
+            optionsBuilder.EnableServiceProviderCaching();
+            optionsBuilder.EnableThreadSafetyChecks();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -25,23 +28,20 @@ namespace FIQ.Interview.Api
 
                 b.Property(x => x.Id).IsRequired();
                 b.HasData(
-                    new Project { Id = 1, Name = "Project1" },
-                    new Project { Id = 2, Name = "Project2" },
-                    new Project { Id = 3, Name = "Project3" },
-                    new Project { Id = 4, Name = "Project4" }
-                );
+            new Project { Id = 1, Name = "Project A" },
+            new Project { Id = 2, Name = "Project B" }
+        );
+
             });
 
             modelBuilder.Entity<WorkItem>(b =>
             {
                 b.Property(x => x.Id).IsRequired();
                 b.HasData(
-                    new WorkItem { Id = 1, Description = "Description1", ProjectId = 1 },
-                    new WorkItem { Id = 2, Description = "Description2", ProjectId = 1 },
-                    new WorkItem { Id = 3, Description = "Description1", ProjectId = 2 },
-                    new WorkItem { Id = 4, Description = "Description1", ProjectId = 2 },
-                    new WorkItem { Id = 5, Description = "Description1", ProjectId = 3 }
-                );
+            new WorkItem { Id = 1, Title = "Task 1", Description = "Description 1", ProjectId = 1 },
+                new WorkItem { Id = 2, Title = "Task 2", Description = "Description 2", ProjectId = 1 },
+                new WorkItem { Id = 3, Title = "Task 3", Description = "Description 3", ProjectId = 2 }
+        );
             });
 
            
